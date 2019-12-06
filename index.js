@@ -13,12 +13,14 @@ I need this code, just don't know where, perhaps should make some middleware, do
 Go code!
 */
 const ActionRouter = require('./Routers/ActionRouter');
+const PostRouter = require('./Routers/ProjectRouter');
 const express = require('express');
 
 const app = express();
 app.use(express.json());
 
 app.use('/actions', ActionRouter);
+app.use('/projects', PostRouter);
 
 const port = 4000;
 
