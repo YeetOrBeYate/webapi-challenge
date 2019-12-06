@@ -12,3 +12,14 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+const ActionRouter = require('./Routers/ActionRouter');
+const express = require('express');
+
+const app = express();
+app.use(express.json());
+
+app.use('/actions', ActionRouter);
+
+const port = 4000;
+
+app.listen(port, ()=>{console.log(`port running on ${port}`)})
