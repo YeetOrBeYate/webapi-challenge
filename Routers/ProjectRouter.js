@@ -26,6 +26,44 @@ router.post('/', (req,res)=>{
     })
 })
 
+router.put('/:id', (req,res)=>{
+    const id = req.params.id;
+    const body = req.body;
+
+    db.update(id,body)
+    .then((project)=>{
+        res.status(200).json({project})
+
+    })
+    .catch((err)=>{
+        res.status(500).json({err})
+    })
+})
+
+router.delete('/:id', (req,res)=>{
+    const id =req.params.id;
+
+    db.remove(id)
+    .then(()=>{
+        res.status(201).json({message:'project removed'})
+    })
+    .catch((err)=>{
+        res.status(500).json({err})
+    })
+})
+
+router.get("/:id/actions", (req,res)=>{
+    const id = req.params.id;
+
+    db.getProjectActions(id)
+    .then((actions)=>{
+        res.status(200).json({actions})
+    })
+    .catch((err)=>{
+        res.status(500).json({err})
+    })
+})
+
 
 
 
