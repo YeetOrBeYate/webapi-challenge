@@ -25,4 +25,27 @@ router.post('/', (req,res)=>{
     })
 })
 
+router.put("/:id", (req,res)=>{
+    const id = req.params.id;
+    const changes = req.body;
+    db.update(id,changes)
+    .then((action)=>{
+        res.status(201).json({action})
+    })
+    .catch((err)=>{
+        res.status(500).json({err})
+    })
+})
+
+router.delete('/:id', (req,res)=>{
+    const id = req.params.id;
+    db.remove(id)
+    .then(()=>{
+        res.status(201).json({message:"thing has been removed"})
+    })
+    .catch((err)=>{
+        res.status(500).json({err})
+    })
+})
+
 module.exports = router;
