@@ -40,14 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+The server side routing that enables HTTP methods to be handled, and middleware functions that allow verfication and manipulation of data
+
 - [ ] Describe Middleware?
+
+Middleware are functions that verify or change the data on an incomming/outgoing request 
 
 - [ ] Describe a Resource?
 
+A database that allows for data persistance on the server
+
 - [ ] What can the API return to help clients know if a request was successful?
+
+The status code and json object that is a message of something from the database related to the request
 
 - [ ] How can we partition our application into sub-applications?
 
+By using custom built and built in express middlware to manage different aspects of the data
 ## Minimum Viable Product
 
 - [ ] Configure an _npm script_ named _"server"_ that will execute your code using _nodemon_. Make _nodemon_ be a development time dependency only, it shouldn't be deployed to production.
