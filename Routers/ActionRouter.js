@@ -1,7 +1,25 @@
 const express = require('express');
 const db = require("../data/helpers/actionModel");
+const projectDB = require('../data/helpers/projectModel');
 
 const router = express.Router();
+
+const ProjIdValidate = (req,res,next)=>{
+    const id = req.body.project_id;
+
+    projectDB.get(id)
+    .then(prj=>{
+        if(prj===null){
+            res.status(404).json({message:"the project id you gave me does not exist"})
+        }else{
+            next();
+        }
+    })
+    .catch(err=>[
+        res.status(500).json({err})
+    ])
+    
+}
 
 router.get("/:id", (req,res)=>{
     const id = req.params.id;
@@ -14,8 +32,9 @@ router.get("/:id", (req,res)=>{
     })
 })
 
-router.post('/', (req,res)=>{
+router.post('/',ProjIdValidate, (req,res)=>{
     const action = req.body;
+    
     db.insert(action)
     .then((action)=>{
         res.status(201).json({action})

@@ -3,11 +3,29 @@ const router = express.Router();
 
 const db = require('../data/helpers/projectModel');
 
-router.get('/:id', (req,res)=>{
+const projectIDCheck = (req,res,next)=>{
     const id = req.params.id;
     db.get(id)
     .then((project)=>{
+        if(project === null){
+            res.status(404).json({message: 'the id you sent me does not exist'})
+        }else{
+            next()
+        }
+    })
+    .catch((err)=>{
+        res.status(500).json({err})
+    })
+}
+
+router.get('/:id', projectIDCheck, (req,res)=>{
+    const id = req.params.id;
+    db.get(id)
+    .then((project)=>{
+        
+
         res.status(200).json({project})
+        
     })
     .catch((err)=>{
         res.status(500).json({err})
